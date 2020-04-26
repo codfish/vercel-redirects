@@ -28,7 +28,7 @@ async function add(destination, source, statusCode) {
       .substring(0, 4)}`;
   }
 
-  config.redirects.push({
+  config.redirects.unshift({
     source,
     destination,
     statusCode,
@@ -38,11 +38,9 @@ async function add(destination, source, statusCode) {
   await writeJsonFile(configPath, config);
 
   console.log();
-  console.log(chalk.cyan(`Redirect added successfully.`));
+  console.log('Redirect added successfully.');
   console.log();
-  console.log(
-    chalk.cyan(`  > ${chalk.green(source)} now redirects to ${chalk.green(destination)}`),
-  );
+  console.log(`  > ${chalk.green(source)} now redirects to ${chalk.green(destination)}`);
   console.log();
 }
 
