@@ -35,10 +35,12 @@ npm install --save-dev vercel-redirects
 ```json
 {
   "scripts": {
-    "shorten": "vercel-redirects ..."
+    "shorten": "vercel-redirects"
   }
 }
 ```
+
+You can then then run `npm run shorten <destination-url>`.
 
 You can also install and run this globally.
 
@@ -102,11 +104,41 @@ vercel-redirects -c 302 https://codfish.io
 vercel-redirects --status-code 302 https://codfish.io
 ```
 
+## Configuration
+
+Add configuration in the following ways (in order of precedence):
+
+1. A `vercel-redirects` object in your `package.json`.
+1. A `.vercelredirectsrc.json` file to the root of your project.
+1. A `.vercelredirectsrc` file to the root of your project.
+
+**package.json example:**
+
+```json
+{
+  "vercel-redirects": {
+    "autoPush": true
+  }
+}
+```
+
+**.vercelredirectsrc.json and .vercelredirectsrc example:**
+
+```json
+{
+  "autoPush": true
+}
+```
+
+| Variable   | Type    | Default | Description                                                                     |
+| ---------- | ------- | ------- | ------------------------------------------------------------------------------- |
+| `autoPush` | boolean | `false` | Automatically commit and push, effectively deploying whenever changes are made. |
+
 ## Inspiration
 
-My own URL shortener project, [codfi.sh](https://codfi.sh) is a public project I built as a part of
-a General Assembly course that allows anyone to shorten a url, a la bit.ly. For a number of reasons,
-this project was kind of a pain to maintain for me over the years.
+My own URL shortener project, [r.codfi.sh](http://r.codfi.sh) is a public project I built as a part
+of a General Assembly course that allows anyone to shorten a url, a la bit.ly. For a number of
+reasons, this project was kind of a pain to maintain for me over the years.
 
 So when I stumbled upon Kent C. Dodd's
 [netlify-shortner](https://github.com/kentcdodds/netlify-shortener) & his url shortener
