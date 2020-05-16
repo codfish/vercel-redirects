@@ -17,6 +17,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
   - [Add](#add)
+- [Configuration](#configuration)
 - [Inspiration](#inspiration)
 - [LICENSE](#license)
 
