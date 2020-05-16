@@ -58,7 +58,7 @@ function gitPull(cwd) {
 }
 
 async function gitCommitAndPush(message = 'feat: new redirect', cwd) {
-  await exec(`git commit -am ${message}`, { stdio: 'inherit', cwd });
+  await exec(`git commit -am "${message}"`, { stdio: 'inherit', cwd });
   await exec('git push', { stdio: 'inherit', cwd });
 }
 
