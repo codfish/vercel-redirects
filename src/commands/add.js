@@ -47,11 +47,12 @@ async function add(destination, source, options = {}) {
     source = await shorten(destination);
   }
 
-  vercelConfig.redirects.unshift({
+  const redirect = {
     source,
     destination,
     statusCode: options.statusCode,
-  });
+  };
+  vercelConfig.redirects.unshift(redirect);
 
   // update file
   await writeVercelConfig(vercelConfig, vercelConfigPath);
@@ -63,6 +64,8 @@ async function add(destination, source, options = {}) {
     console.log('Deploying new redirect...');
     await gitCommitAndPush(`feat: new redirect, ${source} -> ${destination}`, cwd);
   }
+
+  return redirect;
 }
 
 module.exports = add;

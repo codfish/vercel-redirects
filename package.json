@@ -14,7 +14,7 @@
   "bin": {
     "vercel-redirects": "dist/cli.js"
   },
-  "main": "dist/cli.js",
+  "main": "dist/index.js",
   "keywords": [],
   "license": "MIT",
   "dependencies": {
