@@ -170,7 +170,7 @@ MIT
 [package]: https://www.npmjs.com/package/vercel-redirects
 [downloads-badge]: https://img.shields.io/npm/dm/vercel-redirects.svg?style=flat-square
 [license-badge]: https://img.shields.io/npm/l/vercel-redirects.svg?style=flat-square
-[license]: https://github.com/codfish/vercel-redirects/blob/master/LICENSE
+[license]: https://github.com/codfish/vercel-redirects/blob/main/LICENSE
 [actions]: https://github.com/codfish/vercel-redirects/actions
 [actions-badge]:
-  https://img.shields.io/github/workflow/status/codfish/vercel-redirects/Release/master?style=flat-square
+  https://img.shields.io/github/workflow/status/codfish/vercel-redirects/Release/main?style=flat-square

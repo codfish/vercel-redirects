@@ -31,9 +31,8 @@
     "cod-scripts": "^4.0.2"
   },
   "engines": {
-    "node": ">=10",
-    "npm": ">=6",
-    "yarn": ">=1"
+    "node": ">=14",
+    "npm": ">=6"
   },
   "repository": {
     "type": "git",
