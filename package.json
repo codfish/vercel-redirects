@@ -19,16 +19,17 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "chalk": "^4.0.0",
-    "commander": "^5.0.0",
+    "chalk": "^5.0.1",
+    "commander": "^9.4.0",
     "find-up": "^4.1.0",
     "load-json-file": "^6.2.0",
     "normalizr": "^3.6.0",
-    "vercel": "^1.0.0",
+    "vercel": "^27.4.0",
     "write-json-file": "^4.3.0"
   },
   "devDependencies": {
-    "cod-scripts": "^4.0.2"
+    "cod-scripts": "^10.0.0",
+    "husky": "^8.0.0"
   },
   "engines": {
     "node": ">=14",
@@ -45,7 +46,8 @@
     "lint": "cod-scripts lint",
     "lint:commit": "cod-scripts commitlint",
     "test": "cod-scripts test",
-    "shorten": "node dist/cli.js"
+    "shorten": "node dist/cli.js",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -53,12 +55,6 @@
     ],
     "rules": {
       "no-console": "off"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "cod-scripts pre-commit",
-      "commit-msg": "cod-scripts commitlint -E HUSKY_GIT_PARAMS"
     }
   }
 }
