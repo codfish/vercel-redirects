@@ -9,30 +9,31 @@
     "url": "https://codfish.io"
   },
   "files": [
-    "dist"
+    "src"
   ],
   "bin": {
-    "vercel-redirects": "dist/cli.js"
+    "vercel-redirects": "src/cli.js"
   },
-  "main": "dist/index.js",
+  "type": "module",
+  "exports": "./src/index.js",
   "keywords": [],
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "chalk": "^5.0.1",
     "commander": "^9.4.0",
-    "find-up": "^4.1.0",
-    "load-json-file": "^6.2.0",
+    "find-up": "^6.3.0",
+    "load-json-file": "^7.0.1",
     "normalizr": "^3.6.0",
     "vercel": "^27.4.0",
-    "write-json-file": "^4.3.0"
+    "write-json-file": "^5.0.0"
   },
   "devDependencies": {
     "cod-scripts": "^10.0.0",
     "husky": "^8.0.0"
   },
   "engines": {
-    "node": ">=14",
+    "node": ">=14.16",
     "npm": ">=6"
   },
   "repository": {
@@ -40,13 +41,11 @@
     "url": "https://github.com/codfish/vercel-redirects.git"
   },
   "scripts": {
-    "build": "cod-scripts build",
-    "build:watch": "npm run build -- --watch --verbose",
     "format": "cod-scripts format",
     "lint": "cod-scripts lint",
     "lint:commit": "cod-scripts commitlint",
-    "test": "cod-scripts test",
-    "shorten": "node dist/cli.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules cod-scripts test",
+    "shorten": "node src/cli.js",
     "prepare": "husky install"
   },
   "eslintConfig": {
@@ -54,7 +53,8 @@
       "./node_modules/cod-scripts/eslint.js"
     ],
     "rules": {
-      "no-console": "off"
+      "no-console": "off",
+      "import/extensions": "off"
     }
   }
 }

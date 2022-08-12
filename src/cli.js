@@ -1,11 +1,18 @@
 #!/usr/bin/env node
 
-const { program } = require('commander');
-const add = require('./commands/add');
-const { parseStatusCode } = require('./utils');
-const { name, version } = require('../package.json');
+import { program } from 'commander';
+import { createRequire } from 'module';
+import add from './commands/add.js';
+import { parseStatusCode } from './utils.js';
 
-program.name(name).version(version, '-v, --version', 'Output the current version.');
+// Possible alternative in future:
+// import packageJson from '../package.json' assert { type: 'json' };
+const esmRequire = createRequire(import.meta.url);
+const packageJson = esmRequire('../package.json');
+
+program
+  .name(packageJson.name)
+  .version(packageJson.version, '-v, --version', 'Output the current version.');
 
 /**
  * Add a new redirect.

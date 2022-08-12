@@ -1,3 +1,3 @@
-const add = require('./commands/add');
+import add from './commands/add';
 
-module.exports = { add };
+export default { add };

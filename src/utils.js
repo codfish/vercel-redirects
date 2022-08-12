@@ -1,11 +1,14 @@
-const crypto = require('crypto');
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-const loadJsonFile = require('load-json-file');
-const writeJsonFile = require('write-json-file');
-const findUp = require('find-up');
+import childProcess from 'child_process';
+import crypto from 'crypto';
+import util from 'util';
+import { loadJsonFile } from 'load-json-file';
+import { writeJsonFile } from 'write-json-file';
+import { findUp } from 'find-up';
+import chalk from 'chalk';
 
-function parseStatusCode(code) {
+const exec = util.promisify(childProcess.exec);
+
+export function parseStatusCode(code) {
   const codeInt = parseInt(code, 10);
   if (codeInt < 301 || codeInt > 308) {
     console.error(`error: invalid status code ${code}`);
@@ -17,7 +20,7 @@ function parseStatusCode(code) {
 /**
  * Load vercel-redirects cli configuration.
  */
-async function loadConfig() {
+export async function loadConfig() {
   const pkgPath = await findUp('package.json');
   const pkg = pkgPath ? await loadJsonFile(pkgPath) : {};
 
@@ -31,21 +34,12 @@ async function loadConfig() {
 }
 
 /**
- * Load vercel.json configuration.
- */
-async function loadVercelConfig() {
-  const configPath = await findUp(['vercel.json', 'now.json']);
-  const config = await loadJsonFile(configPath);
-  return [configPath, config];
-}
-
-/**
  * Write to vercel.json configuration.
  *
  * @param {object} config - Full vercel.json config object.
- * @param {object} configPath - Full path to configuration file.
+ * @param {object} [configPath] - Full path to configuration file.
  */
-async function writeVercelConfig(config, configPath) {
+export async function writeVercelConfig(config, configPath) {
   let path = configPath;
   if (!path) {
     path = await findUp(['vercel.json', 'now.json']);
@@ -53,16 +47,41 @@ async function writeVercelConfig(config, configPath) {
   return writeJsonFile(path, config, { indent: '  ', detectIndent: true });
 }
 
-function gitPull(cwd) {
+/**
+ * Load vercel.json configuration.
+ */
+export async function loadVercelConfig() {
+  const configPath = await findUp(['vercel.json', 'now.json']);
+  if (!configPath) {
+    console.warn(
+      '\n',
+      chalk.yellow(
+        `[vercel-redirects]: Could not find vercel config file. Creating ${chalk.cyan(
+          'vercel.json',
+        )}.`,
+      ),
+      '\n',
+    );
+    const pkgPath = await findUp('package.json');
+    const path = pkgPath.replace('package.json', 'vercel.json');
+    const config = { redirects: [] };
+    await writeVercelConfig(config, path);
+    return [path, config];
+  }
+  const config = await loadJsonFile(configPath);
+  return [configPath, config];
+}
+
+export function gitPull(cwd) {
   return exec('git pull', { stdio: 'inherit', cwd });
 }
 
-async function gitCommitAndPush(message = 'feat: new redirect', cwd) {
+export async function gitCommitAndPush(message = 'feat: new redirect', cwd) {
   await exec(`git commit -am "${message}"`, { stdio: 'inherit', cwd });
   await exec('git push', { stdio: 'inherit', cwd });
 }
 
-async function shorten(longUrl) {
+export async function shorten(longUrl) {
   return `/${await crypto
     .createHash('md5')
     .update(longUrl + Date.now())
@@ -70,7 +89,7 @@ async function shorten(longUrl) {
     .substring(0, 4)}`;
 }
 
-function validateUniqueness(source, redirects) {
+export function validateUniqueness(source, redirects = []) {
   const existingRedirect = redirects.find(redirect => redirect.source === source);
   if (existingRedirect) {
     console.error(`error: ${source} already redirects to ${existingRedirect.destination}`);
@@ -78,14 +97,3 @@ function validateUniqueness(source, redirects) {
   }
   return true;
 }
-
-module.exports = {
-  parseStatusCode,
-  loadConfig,
-  loadVercelConfig,
-  writeVercelConfig,
-  gitPull,
-  gitCommitAndPush,
-  shorten,
-  validateUniqueness,
-};
