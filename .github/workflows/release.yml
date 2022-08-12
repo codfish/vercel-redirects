@@ -19,7 +19,6 @@ jobs:
       - name: validate before release
         run: |
           npm install --no-save
-          npm run build
           npm run lint
           npm run test
         env:
