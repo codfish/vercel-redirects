@@ -7,11 +7,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
         with:
-          node-version: 12.x
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
 
       - name: install dependencies
         run: npm install --no-save
@@ -23,11 +25,6 @@ jobs:
 
       - name: lint js
         run: npm run lint
-
-      - name: build
-        run: npm run build
-        env:
-          CI: true
 
       - name: run tests
         run: npm run test

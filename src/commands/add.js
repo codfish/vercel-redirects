@@ -1,6 +1,6 @@
-const path = require('path');
-const chalk = require('chalk');
-const {
+import chalk from 'chalk';
+import path from 'path';
+import {
   loadConfig,
   loadVercelConfig,
   writeVercelConfig,
@@ -8,7 +8,7 @@ const {
   gitCommitAndPush,
   shorten,
   validateUniqueness,
-} = require('../utils');
+} from '../utils.js';
 
 /**
  * Add a new redirect to your Vercel project configuration.
@@ -33,6 +33,7 @@ async function add(destination, source, options = {}) {
   const config = await loadConfig();
   const [vercelConfigPath, vercelConfig] = await loadVercelConfig();
   const cwd = path.dirname(vercelConfigPath);
+  vercelConfig.redirects = vercelConfig.redirects || [];
 
   validateUniqueness(source, vercelConfig.redirects);
 
@@ -68,4 +69,4 @@ async function add(destination, source, options = {}) {
   return redirect;
 }
 
-module.exports = add;
+export default add;

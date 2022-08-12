@@ -93,5 +93,4 @@ typings/
 # Custom
 dist
 build
-vercel.json
-now.json
+.vercel
