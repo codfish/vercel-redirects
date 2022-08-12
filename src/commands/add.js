@@ -63,7 +63,7 @@ async function add(destination, source, options = {}) {
 
   if (config.autoPush) {
     console.log('Deploying new redirect...');
-    await gitCommitAndPush(`feat: new redirect, ${source} -> ${destination}`, cwd);
+    await gitCommitAndPush(cwd, `feat: new redirect, ${source} -> ${destination}`);
   }
 
   return redirect;

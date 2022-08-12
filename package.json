@@ -29,7 +29,7 @@
     "write-json-file": "^5.0.0"
   },
   "devDependencies": {
-    "cod-scripts": "^10.0.0",
+    "cod-scripts": "^11.0.0",
     "husky": "^8.0.0"
   },
   "engines": {

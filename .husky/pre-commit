@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx --no-install cod-scripts pre-commit
+NODE_OPTIONS=--experimental-vm-modules npx --no-install cod-scripts pre-commit
