@@ -137,15 +137,14 @@ Add configuration in the following ways (in order of precedence):
 
 ## Inspiration
 
-My own URL shortener project, [r.codfi.sh](http://r.codfi.sh) is a public project I built as a part
-of a General Assembly course that allows anyone to shorten a url, a la bit.ly. For a number of
-reasons, this project was kind of a pain to maintain for me over the years.
+I had originally created a URL shortener, `codfi.sh`, for a project I built as a part
+of a General Assembly course. For a number of reasons, this project was kind of a pain to
+maintain for me over the years.
 
-So when I stumbled upon Kent C. Dodd's
+I stumbled upon Kent C. Dodd's
 [netlify-shortner](https://github.com/kentcdodds/netlify-shortener) & his url shortener
-[app tutorial](https://www.youtube.com/watch?v=HL6paXyx6hM), I was motivated to create my own and
-migrate my short url domain, `codfi.sh` to use that instead. The ruby app is still up at
-[r.codfi.sh](http://r.codfi.sh).
+[app tutorial](https://www.youtube.com/watch?v=HL6paXyx6hM), and was motivated to create my own and
+migrate my short url domain, `codfi.sh` to use that instead.
 
 However, I'm a huge fan of Vercel (formally Now) and that's what I personally use for all my
 serverless apps. This cli utility was built to help facilitate the creation of redirects & short
